@@ -1,0 +1,25 @@
+// .sequelizerc
+
+const fs = require('fs');
+const path = require('path');
+const data = require(path.resolve('config.js'));
+const dotenv = require('dotenv');
+dotenv.config();
+
+const dataJson = JSON.stringify(data);
+
+console.log('NODE_ENV: ', process.env.NODE_ENV);
+
+fs.writeFileSync('config.json', dataJson, (err) => {
+  if (err) {
+    console.error(err);
+  }
+  console.log('file written successfully');
+});
+
+module.exports = {
+  config: path.resolve('config.json'),
+  'models-path': path.resolve('models'),
+  'seeders-path': path.resolve('seeders'),
+  'migrations-path': path.resolve('migrations'),
+};
